@@ -38,7 +38,7 @@ public class mainFrame extends javax.swing.JFrame {
         panelMenu = new javax.swing.JPanel();
         boutonLancer = new javax.swing.JButton();
         boutonPerso = new javax.swing.JButton();
-        jSlider1 = new javax.swing.JSlider();
+        sliderNombreVoiture = new javax.swing.JSlider();
         labelConcurrent = new javax.swing.JLabel();
         panelClassement = new javax.swing.JPanel();
         panelClassement.setVisible(false);
@@ -67,11 +67,11 @@ public class mainFrame extends javax.swing.JFrame {
             }
         });
 
-        jSlider1.setMinorTickSpacing(10);
-        jSlider1.setPaintTicks(true);
-        jSlider1.setSnapToTicks(true);
-        jSlider1.setValue(10);
-        jSlider1.setName(""); // NOI18N
+        sliderNombreVoiture.setMinorTickSpacing(10);
+        sliderNombreVoiture.setPaintTicks(true);
+        sliderNombreVoiture.setSnapToTicks(true);
+        sliderNombreVoiture.setValue(10);
+        sliderNombreVoiture.setName(""); // NOI18N
 
         labelConcurrent.setText("Nombre de concurrents");
 
@@ -87,7 +87,7 @@ public class mainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(labelConcurrent)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sliderNombreVoiture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(96, 96, 96))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -101,7 +101,7 @@ public class mainFrame extends javax.swing.JFrame {
                 .addComponent(boutonLancer)
                 .addGap(49, 49, 49)
                 .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sliderNombreVoiture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelConcurrent))
                 .addGap(56, 56, 56)
                 .addComponent(boutonPerso)
@@ -130,9 +130,8 @@ public class mainFrame extends javax.swing.JFrame {
                 .addContainerGap(144, Short.MAX_VALUE)
                 .addGroup(panelClassementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(progresCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelClassementLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(128, 128, 128))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(128, 128, 128))
             .addGroup(panelClassementLayout.createSequentialGroup()
                 .addGap(176, 176, 176)
                 .addComponent(butonRetour)
@@ -220,7 +219,7 @@ public class mainFrame extends javax.swing.JFrame {
         
         
 
-        ArrayList<Voiture> listeVoiture = Voiture.genererVoitures(10);
+        ArrayList<Voiture> listeVoiture = Voiture.genererVoitures(sliderNombreVoiture.getValue());
        
         Course course = new Course(5, listeVoiture );
         
@@ -301,7 +300,6 @@ public class mainFrame extends javax.swing.JFrame {
     private javax.swing.JButton boutonPerso;
     private javax.swing.JButton butonRetour;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSlider jSlider1;
     private javax.swing.JLabel labelConcurrent;
     private javax.swing.JLabel labelFastRace;
     private javax.swing.JList<String> listeClassement;
@@ -309,5 +307,6 @@ public class mainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel panelMenu;
     private javax.swing.JPanel panelPerso;
     private javax.swing.JProgressBar progresCourse;
+    private javax.swing.JSlider sliderNombreVoiture;
     // End of variables declaration//GEN-END:variables
 }

@@ -14,14 +14,15 @@ public class Course {
     private int tourActuel;
     private boolean boost;
     private boolean malus;
-
-
+    private int argent ;
+    
     public Course(int nbTours, ArrayList<Voiture> voitures) {
         this.nbToursMax = nbTours;
         this.tourActuel = 0;
         this.voitures = voitures;
         this.malus = false;
         this.boost = false;
+        this.argent =175;
     }
 
     public boolean isBoost() {
@@ -57,17 +58,20 @@ public class Course {
             
             Collections.sort(this.voitures);
             this.tourActuel++;
-        }
+        }      
         return voitures;
     }
     
     public int getNbTourMax() {
         return this.nbToursMax;
     }
-    
+    public int getArgent() {
+        return this.argent;
+    }
+    public void setArgent (int tune){
+        this.argent=tune;
+    }
     public int getTourActuel() {
         return tourActuel;
     }
-    
-    
 }

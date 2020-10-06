@@ -228,6 +228,36 @@ public class mainFrame extends javax.swing.JFrame {
         //on récupére la liste des voitures aléatoires
         ArrayList<Voiture> listeVoiture = Voiture.genererVoitures(sliderNombreVoiture.getValue());
        
+        Course course = new Course(5, listeVoiture );
+        
+        
+        
+        DefaultListModel listModel = new DefaultListModel();
+        
+
+        int tourmaxCourse = course.getNbTourMax();
+        for (int i = 0; i < tourmaxCourse; i++) {
+            ArrayList<Voiture> classement = course.getClassement();
+            listModel.clear();
+            for (int j = 0; j < classement.size(); j++){
+                
+                //update la liste de
+                listModel.addElement(classement.get(j).getNomVoiture());
+                
+               
+
+            }
+            listeClassement.setModel(listModel);
+            
+             //Update la barre de progres de la course
+            progresCourse.setValue(100/tourmaxCourse*(i+1));
+         if ( i==tourmaxCourse){
+             for (int z =0; z< classement.size();z++)
+             {
+                 
+             }
+                     }   
+        }
         course = new Course(5, listeVoiture );
         listModel = new DefaultListModel();
          btAjoutTour.setVisible(true);

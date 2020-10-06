@@ -16,6 +16,7 @@ public class Voiture implements Comparable<Voiture> {
     int acceleration;
     boolean pneuPluie;
     boolean boosted;
+    boolean malus;
 
     public Voiture(String nomVoiture){
         vitesseActuelle = 0;
@@ -23,6 +24,7 @@ public class Voiture implements Comparable<Voiture> {
         acceleration=0;
         pneuPluie=false;
         boosted=false;
+        malus=false;
     }
     
     
@@ -33,6 +35,27 @@ public class Voiture implements Comparable<Voiture> {
         this.acceleration = acceleration.action();
         this.pneuPluie = pneuPluie; 
         this.boosted = false;
+        this.malus=false;
+    }
+
+    public void setNomVoiture(String nomVoiture) {
+        this.nomVoiture = nomVoiture;
+    }
+
+    public void setVitesseActuelle(int vitesseActuelle) {
+        this.vitesseActuelle = vitesseActuelle;
+    }
+
+    public void setVitesseMax(int vitesseMax) {
+        this.vitesseMax = vitesseMax;
+    }
+
+    public void setAcceleration(int acceleration) {
+        this.acceleration = acceleration;
+    }
+
+    public void setPneuPluie(boolean pneuPluie) {
+        this.pneuPluie = pneuPluie;
     }
 
     public String getNomVoiture() {
@@ -63,13 +86,26 @@ public class Voiture implements Comparable<Voiture> {
         return boosted;
     }
 
+     public void setMalus(boolean malu) {
+        this.malus = malu;
+    }
+    
+    public boolean isMalus() {
+        return malus;
+    }
+
+    
    public int getVitesse(){
-       if(boosted) { // Return si la voiture dispose d'un boost pour ce tour
+       if(boosted && !malus) { // si boost et pas malus
            vitesseActuelle=vitesseActuelle+(int) Math.round(acceleration*1.2); // Le boost est de 20% de l'accélération (on arrondi à l'entier le plus proche)
-           boosted = false; // Réinitialisation du boost
-       } else {
+       } else if(!boosted && malus) {
+           vitesseActuelle=vitesseActuelle+(int) Math.round(acceleration*0.8); // Le malus est de 20% de l'accélération (on arrondi à l'entier le plus proche)
+       } else { // Si il y a un boost et malus ou s'il n'y a rien la conséquence est la même, la vitesse est calculée normalement
            vitesseActuelle=vitesseActuelle+acceleration;
        }
+       
+       boosted = false; // Réinitialisation du boost
+       malus = false; // Réinitialisation du malus
        
        if(vitesseActuelle > vitesseMax) { // On vérifie que la voiture ne dépasse pas sa vitesse maximale
            vitesseActuelle = vitesseMax;
@@ -86,13 +122,15 @@ public class Voiture implements Comparable<Voiture> {
         
         String nom;
         boolean nameExist;
+        int vId = 1;
         do{
             nameExist = false;
-            nom = NameGenerator.generate();
+            nom = NameGenerator.generate() + vId;
             // Vérifier que le nom n'existe pas déjà
             for(Voiture v: autresVoitures) {
                 if (v.getNomVoiture().equals(nom)) {
                     nameExist = true;
+                    vId++;
                 }
             }
         } while (nameExist);

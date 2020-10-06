@@ -35,5 +35,10 @@ public class Course {
         return tourActuel;
     }
     
+    public boolean hasEnded(){
+            if(this.tourActuel <= this.nbToursMax) return true;
+            return false;
+    }
+    
     
 }

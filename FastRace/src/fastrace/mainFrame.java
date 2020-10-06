@@ -36,7 +36,6 @@ public class mainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelFastRace = new javax.swing.JLabel();
         panelMenu = new javax.swing.JPanel();
         boutonLancer = new javax.swing.JButton();
         boutonPerso = new javax.swing.JButton();
@@ -53,8 +52,7 @@ public class mainFrame extends javax.swing.JFrame {
         panelPerso.setVisible(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        labelFastRace.setText("fastRace");
+        setTitle("Fast-race");
 
         boutonLancer.setText("Lancer");
         boutonLancer.addActionListener(new java.awt.event.ActionListener() {
@@ -140,22 +138,24 @@ public class mainFrame extends javax.swing.JFrame {
                 .addContainerGap(66, Short.MAX_VALUE)
                 .addGroup(panelClassementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClassementLayout.createSequentialGroup()
-                        .addGroup(panelClassementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(progresCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(128, 128, 128))
+                        .addComponent(progresCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(144, 144, 144))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClassementLayout.createSequentialGroup()
                         .addComponent(btAjoutTour)
                         .addGap(64, 64, 64)
                         .addComponent(butonRetour)
                         .addGap(102, 102, 102))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClassementLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelClassementLayout.setVerticalGroup(
             panelClassementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelClassementLayout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(progresCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addGroup(panelClassementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -179,10 +179,7 @@ public class mainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(203, 203, 203)
-                .addComponent(labelFastRace)
-                .addContainerGap(264, Short.MAX_VALUE))
+            .addGap(0, 529, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 21, Short.MAX_VALUE)
@@ -201,10 +198,7 @@ public class mainFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(labelFastRace)
-                .addContainerGap(350, Short.MAX_VALUE))
+            .addGap(0, 398, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -245,7 +239,8 @@ public class mainFrame extends javax.swing.JFrame {
              listeClassement.setModel(listModel);
         }     
         
-        progresCourse.setValue(0);
+        progresCourse.setValue(1);
+        progresCourse.setMaximum(course.getNbTourMax());
     }//GEN-LAST:event_boutonLancerActionPerformed
 
     private void boutonPersoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonPersoActionPerformed
@@ -261,18 +256,20 @@ public class mainFrame extends javax.swing.JFrame {
     private void btAjoutTourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAjoutTourActionPerformed
         
         ArrayList<Voiture> classement = course.getClassement();
-        listModel.clear();
-        for (int j = 0; j < classement.size(); j++){
-            //update la liste des voitures
-            listModel.addElement(classement.get(j).getNomVoiture());
-            listeClassement.setModel(listModel);
-        }     
-        
-        progresCourse.setValue(course.getTourActuel()/ course.getNbTourMax() * 100);
-        System.out.println(course.getTourActuel()/ course.getNbTourMax() * 100);
-        System.out.println(course.getTourActuel());
-        System.out.println(course.getNbTourMax());
+        if(course.hasEnded()){
+            listModel.clear();
 
+            for (int j = 0; j < classement.size(); j++){
+                //update la liste des voitures
+                
+                listModel.addElement(classement.get(j).getNomVoiture());
+                listeClassement.setModel(listModel);
+            }
+            progresCourse.setValue(course.getTourActuel());   
+        } else {
+            btAjoutTour.setVisible(false);
+        }
+         
     }//GEN-LAST:event_btAjoutTourActionPerformed
 
     /**
@@ -317,7 +314,6 @@ public class mainFrame extends javax.swing.JFrame {
     private javax.swing.JButton butonRetour;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelConcurrent;
-    private javax.swing.JLabel labelFastRace;
     private javax.swing.JList<String> listeClassement;
     private javax.swing.JPanel panelClassement;
     private javax.swing.JPanel panelMenu;

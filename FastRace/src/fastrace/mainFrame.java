@@ -244,7 +244,12 @@ public class mainFrame extends javax.swing.JFrame {
             
              //Update la barre de progres de la course
             progresCourse.setValue(100/tourmaxCourse*(i+1));
-            
+         if ( i==tourmaxCourse){
+             for (int z =0; z< classement.size();z++)
+             {
+                 
+             }
+                     }   
         }
         
         

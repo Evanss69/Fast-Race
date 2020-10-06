@@ -55,6 +55,10 @@ public class Voiture implements Comparable<Voiture> {
         return pneuPluie;
     }
     
+    public void setBoosted(boolean boost) {
+        this.boosted = boost;
+    }
+    
     public boolean isBoosted() {
         return boosted;
     }

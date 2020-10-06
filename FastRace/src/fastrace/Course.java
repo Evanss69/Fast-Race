@@ -12,7 +12,7 @@ public class Course {
     private ArrayList<Voiture> voitures;
     private int nbToursMax;
     private int tourActuel;
-    
+
     public Course(int nbTours, ArrayList<Voiture> voitures) {
         this.nbToursMax = nbTours;
         this.tourActuel = 0;
@@ -30,5 +30,10 @@ public class Course {
     public int getNbTourMax() {
         return this.nbToursMax;
     }
+    
+    public int getTourActuel() {
+        return tourActuel;
+    }
+    
     
 }

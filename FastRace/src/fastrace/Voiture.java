@@ -122,13 +122,15 @@ public class Voiture implements Comparable<Voiture> {
         
         String nom;
         boolean nameExist;
+        int vId = 1;
         do{
             nameExist = false;
-            nom = NameGenerator.generate();
+            nom = NameGenerator.generate() + vId;
             // Vérifier que le nom n'existe pas déjà
             for(Voiture v: autresVoitures) {
                 if (v.getNomVoiture().equals(nom)) {
                     nameExist = true;
+                    vId++;
                 }
             }
         } while (nameExist);

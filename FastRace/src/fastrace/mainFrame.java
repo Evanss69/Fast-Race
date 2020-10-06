@@ -24,7 +24,9 @@ public class mainFrame extends javax.swing.JFrame {
     public mainFrame() {
         initComponents();
     }
-
+    
+    static Course course;
+    static DefaultListModel listModel;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,6 +48,7 @@ public class mainFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         listeClassement = new javax.swing.JList<>();
         butonRetour = new javax.swing.JButton();
+        btAjoutTour = new javax.swing.JButton();
         panelPerso = new javax.swing.JPanel();
         panelPerso.setVisible(false);
 
@@ -122,20 +125,30 @@ public class mainFrame extends javax.swing.JFrame {
             }
         });
 
+        btAjoutTour.setText("Tour suivant");
+        btAjoutTour.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAjoutTourActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelClassementLayout = new javax.swing.GroupLayout(panelClassement);
         panelClassement.setLayout(panelClassementLayout);
         panelClassementLayout.setHorizontalGroup(
             panelClassementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClassementLayout.createSequentialGroup()
-                .addContainerGap(144, Short.MAX_VALUE)
-                .addGroup(panelClassementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(progresCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(128, 128, 128))
             .addGroup(panelClassementLayout.createSequentialGroup()
-                .addGap(176, 176, 176)
-                .addComponent(butonRetour)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE)
+                .addGroup(panelClassementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClassementLayout.createSequentialGroup()
+                        .addGroup(panelClassementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(progresCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(128, 128, 128))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClassementLayout.createSequentialGroup()
+                        .addComponent(btAjoutTour)
+                        .addGap(64, 64, 64)
+                        .addComponent(butonRetour)
+                        .addGap(102, 102, 102))))
         );
         panelClassementLayout.setVerticalGroup(
             panelClassementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,9 +157,11 @@ public class mainFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(progresCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(butonRetour)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addGroup(panelClassementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(butonRetour)
+                    .addComponent(btAjoutTour))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelPersoLayout = new javax.swing.GroupLayout(panelPerso);
@@ -215,10 +230,8 @@ public class mainFrame extends javax.swing.JFrame {
         panelMenu.setVisible(false);
         panelPerso.setVisible(false);
         
-        int tourmax;
         
-        
-
+        //on récupére la liste des voitures aléatoires
         ArrayList<Voiture> listeVoiture = Voiture.genererVoitures(sliderNombreVoiture.getValue());
        
         Course course = new Course(5, listeVoiture );
@@ -251,8 +264,18 @@ public class mainFrame extends javax.swing.JFrame {
              }
                      }   
         }
+        course = new Course(5, listeVoiture );
+        listModel = new DefaultListModel();
         
+        ArrayList<Voiture> classement = course.getClassement();
+        listModel.clear();
+        for (int j = 0; j < classement.size(); j++){
+            //update la liste des voitures
+            listModel.addElement(classement.get(j).getNomVoiture());
+             listeClassement.setModel(listModel);
+        }     
         
+        progresCourse.setValue(0);
     }//GEN-LAST:event_boutonLancerActionPerformed
 
     private void boutonPersoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonPersoActionPerformed
@@ -264,6 +287,23 @@ public class mainFrame extends javax.swing.JFrame {
         panelMenu.setVisible(true);
         panelPerso.setVisible(false);
     }//GEN-LAST:event_butonRetourActionPerformed
+
+    private void btAjoutTourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAjoutTourActionPerformed
+        
+        ArrayList<Voiture> classement = course.getClassement();
+        listModel.clear();
+        for (int j = 0; j < classement.size(); j++){
+            //update la liste des voitures
+            listModel.addElement(classement.get(j).getNomVoiture());
+            listeClassement.setModel(listModel);
+        }     
+        
+        progresCourse.setValue(course.getTourActuel()/ course.getNbTourMax() * 100);
+        System.out.println(course.getTourActuel()/ course.getNbTourMax() * 100);
+        System.out.println(course.getTourActuel());
+        System.out.println(course.getNbTourMax());
+
+    }//GEN-LAST:event_btAjoutTourActionPerformed
 
     /**
      * @param args the command line arguments
@@ -303,6 +343,7 @@ public class mainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton boutonLancer;
     private javax.swing.JButton boutonPerso;
+    private javax.swing.JButton btAjoutTour;
     private javax.swing.JButton butonRetour;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelConcurrent;

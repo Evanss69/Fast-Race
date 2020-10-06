@@ -38,4 +38,7 @@ public class Course {
     public void setArgent (int tune){
         this.argent=tune;
     }
+    public int getTourActuel() {
+        return tourActuel;
+    }
 }

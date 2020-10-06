@@ -102,7 +102,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="labelConcurrent" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jSlider1" min="-2" max="-2" attributes="0"/>
+                  <Component id="sliderNombreVoiture" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
@@ -119,7 +119,7 @@
                   <Component id="boutonLancer" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jSlider1" min="-2" max="-2" attributes="0"/>
+                      <Component id="sliderNombreVoiture" min="-2" max="-2" attributes="0"/>
                       <Component id="labelConcurrent" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
@@ -146,7 +146,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonPersoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JSlider" name="jSlider1">
+        <Component class="javax.swing.JSlider" name="sliderNombreVoiture">
           <Properties>
             <Property name="minorTickSpacing" type="int" value="10"/>
             <Property name="paintTicks" type="boolean" value="true"/>

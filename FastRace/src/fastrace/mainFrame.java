@@ -5,7 +5,6 @@
  */
 package fastrace;
 
-import static fastrace.Course.voitureJoueur;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -25,7 +24,9 @@ public class mainFrame extends javax.swing.JFrame {
     public mainFrame() {
         initComponents();
     }
-
+    
+    static Course course;
+    static DefaultListModel listModel;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,7 +43,7 @@ public class mainFrame extends javax.swing.JFrame {
         panelMenu = new javax.swing.JPanel();
         boutonLancer = new javax.swing.JButton();
         boutonPerso = new javax.swing.JButton();
-        jSlider1 = new javax.swing.JSlider();
+        sliderNombreVoiture = new javax.swing.JSlider();
         labelConcurrent = new javax.swing.JLabel();
         panelClassement = new javax.swing.JPanel();
         panelClassement.setVisible(false);
@@ -50,6 +51,7 @@ public class mainFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         listeClassement = new javax.swing.JList<>();
         butonRetour = new javax.swing.JButton();
+        btAjoutTour = new javax.swing.JButton();
         panelPerso = new javax.swing.JPanel();
         panelPerso.setVisible(false);
         radioVitesseMax1 = new javax.swing.JRadioButton();
@@ -69,8 +71,7 @@ public class mainFrame extends javax.swing.JFrame {
         labelNomPilote = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        labelFastRace.setText("fastRace");
+        setTitle("Fast-race");
 
         boutonLancer.setText("Lancer");
         boutonLancer.addActionListener(new java.awt.event.ActionListener() {
@@ -86,11 +87,11 @@ public class mainFrame extends javax.swing.JFrame {
             }
         });
 
-        jSlider1.setMinorTickSpacing(10);
-        jSlider1.setPaintTicks(true);
-        jSlider1.setSnapToTicks(true);
-        jSlider1.setValue(10);
-        jSlider1.setName(""); // NOI18N
+        sliderNombreVoiture.setMinorTickSpacing(10);
+        sliderNombreVoiture.setPaintTicks(true);
+        sliderNombreVoiture.setSnapToTicks(true);
+        sliderNombreVoiture.setValue(10);
+        sliderNombreVoiture.setName(""); // NOI18N
 
         labelConcurrent.setText("Nombre de concurrents");
 
@@ -106,7 +107,7 @@ public class mainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(labelConcurrent)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sliderNombreVoiture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(96, 96, 96))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -120,7 +121,7 @@ public class mainFrame extends javax.swing.JFrame {
                 .addComponent(boutonLancer)
                 .addGap(49, 49, 49)
                 .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sliderNombreVoiture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelConcurrent))
                 .addGap(56, 56, 56)
                 .addComponent(boutonPerso)
@@ -141,6 +142,13 @@ public class mainFrame extends javax.swing.JFrame {
             }
         });
 
+        btAjoutTour.setText("Tour suivant");
+        btAjoutTour.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAjoutTourActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelClassementLayout = new javax.swing.GroupLayout(panelClassement);
         panelClassement.setLayout(panelClassementLayout);
         panelClassementLayout.setHorizontalGroup(
@@ -152,20 +160,33 @@ public class mainFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(128, 128, 128))
             .addGroup(panelClassementLayout.createSequentialGroup()
-                .addGap(176, 176, 176)
-                .addComponent(butonRetour)
+                .addContainerGap(66, Short.MAX_VALUE)
+                .addGroup(panelClassementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClassementLayout.createSequentialGroup()
+                        .addComponent(progresCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(144, 144, 144))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClassementLayout.createSequentialGroup()
+                        .addComponent(btAjoutTour)
+                        .addGap(64, 64, 64)
+                        .addComponent(butonRetour)
+                        .addGap(102, 102, 102))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClassementLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         panelClassementLayout.setVerticalGroup(
             panelClassementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelClassementLayout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(progresCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(butonRetour)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addGroup(panelClassementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(butonRetour)
+                    .addComponent(btAjoutTour))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         buttonGroupVitesseMax.add(radioVitesseMax1);
@@ -310,6 +331,7 @@ public class mainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelPerso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 529, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 95, Short.MAX_VALUE)
@@ -329,6 +351,7 @@ public class mainFrame extends javax.swing.JFrame {
                     .addComponent(panelPerso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelFastRace))
                 .addContainerGap(57, Short.MAX_VALUE))
+            .addGap(0, 398, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -349,11 +372,9 @@ public class mainFrame extends javax.swing.JFrame {
         panelMenu.setVisible(false);
         panelPerso.setVisible(false);
         
-        int tourmax;
         
-        
-
-        ArrayList<Voiture> listeVoiture = Voiture.genererVoitures(10);
+        //on récupére la liste des voitures aléatoires
+        ArrayList<Voiture> listeVoiture = Voiture.genererVoitures(sliderNombreVoiture.getValue());
        
         Course course = new Course(5, listeVoiture );
         
@@ -378,10 +399,27 @@ public class mainFrame extends javax.swing.JFrame {
             
              //Update la barre de progres de la course
             progresCourse.setValue(100/tourmaxCourse*(i+1));
-            
+         if ( i==tourmaxCourse){
+             for (int z =0; z< classement.size();z++)
+             {
+                 
+             }
+                     }   
         }
+        course = new Course(5, listeVoiture );
+        listModel = new DefaultListModel();
+         btAjoutTour.setVisible(true);
         
+        ArrayList<Voiture> classement = course.getClassement();
+        listModel.clear();
+        for (int j = 0; j < classement.size(); j++){
+            //update la liste des voitures
+            listModel.addElement(classement.get(j).getNomVoiture());
+             listeClassement.setModel(listModel);
+        }     
         
+        progresCourse.setValue(1);
+        progresCourse.setMaximum(course.getNbTourMax());
     }//GEN-LAST:event_boutonLancerActionPerformed
 
     private void boutonPersoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonPersoActionPerformed
@@ -389,30 +427,30 @@ public class mainFrame extends javax.swing.JFrame {
         panelMenu.setVisible(false);
         /*Mise à jour automatique de l'Interface de personnalisation en fonction des stats de la voiture de base*/
        
-        textfieldNom.setText(voitureJoueur.getNomVoiture());
+        textfieldNom.setText(course.voitureJoueur.getNomVoiture());
         
         /*Vitesse max*/
-        if (voitureJoueur.getVitesseMax()==150){
+        if (course.voitureJoueur.getVitesseMax()==150){
             radioVitesseMax1.setSelected(true);
         }
-        else if (voitureJoueur.getVitesseMax()==200){
+        else if (course.voitureJoueur.getVitesseMax()==200){
             radioVitesseMax2.setSelected(true);
         }
-        else if (voitureJoueur.getVitesseMax()==250){
+        else if (course.voitureJoueur.getVitesseMax()==250){
             radioVitesseMax3.setSelected(true);
         }
         /*Acceleration*/
-        if (voitureJoueur.getAcceleration()==50){
+        if (course.voitureJoueur.getAcceleration()==50){
             radioAcceleration1.setSelected(true);
         }
-        else if (voitureJoueur.getVitesseMax()==70){
+        else if (course.voitureJoueur.getVitesseMax()==70){
             radioAcceleration2.setSelected(true);
         }
-        else if (voitureJoueur.getVitesseMax()==100){
+        else if (course.voitureJoueur.getVitesseMax()==100){
             radioAcceleration3.setSelected(true);
         }
         /*Pneus*/
-        if (voitureJoueur.isPneuPluie()==false){
+        if (course.voitureJoueur.isPneuPluie()==false){
             radioPneu1.setSelected(true);
         }
         else {
@@ -438,7 +476,7 @@ public class mainFrame extends javax.swing.JFrame {
     private void boutonValiderPersoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonValiderPersoActionPerformed
         //On applique les modifications a la voiture du joueur
         
-        voitureJoueur.setNomVoiture(textfieldNom.getText().toString());
+        course.voitureJoueur.setNomVoiture(textfieldNom.getText().toString());
         
         //Vitesse Max :
         VitesseMaxVoiture vMax; 
@@ -477,11 +515,30 @@ public class mainFrame extends javax.swing.JFrame {
             pneu=true;
         }
         else pneu =false;
-        voitureJoueur.setVitesseMax(vMax.action());
-        voitureJoueur.setAcceleration(acc.action());
-        voitureJoueur.setPneuPluie(pneu);
+        course.voitureJoueur.setVitesseMax(vMax.action());
+        course.voitureJoueur.setAcceleration(acc.action());
+        course.voitureJoueur.setPneuPluie(pneu);
         
     }//GEN-LAST:event_boutonValiderPersoActionPerformed
+    private void btAjoutTourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAjoutTourActionPerformed
+        
+        ArrayList<Voiture> classement = course.getClassement();
+        if(course.hasEnded()){
+            listModel.clear();
+
+            for (int j = 0; j < classement.size(); j++){
+                //update la liste des voitures
+                
+                listModel.addElement(classement.get(j).getNomVoiture());
+                listeClassement.setModel(listModel);
+            }
+            progresCourse.setValue(course.getTourActuel());   
+        } else {
+            btAjoutTour.setVisible(false);
+        }
+         
+    }//GEN-LAST:event_btAjoutTourActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -523,6 +580,7 @@ public class mainFrame extends javax.swing.JFrame {
     private javax.swing.JButton boutonPerso;
     private javax.swing.JButton boutonQuitterPerso;
     private javax.swing.JButton boutonValiderPerso;
+    private javax.swing.JButton btAjoutTour;
     private javax.swing.JButton butonRetour;
     private javax.swing.ButtonGroup buttonGroupAcceleration;
     private javax.swing.ButtonGroup buttonGroupPneus;
@@ -549,5 +607,6 @@ public class mainFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioVitesseMax2;
     private javax.swing.JRadioButton radioVitesseMax3;
     private javax.swing.JTextField textfieldNom;
+    private javax.swing.JSlider sliderNombreVoiture;
     // End of variables declaration//GEN-END:variables
 }

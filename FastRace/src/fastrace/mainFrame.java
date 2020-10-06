@@ -260,6 +260,14 @@ public class mainFrame extends javax.swing.JFrame {
          if ( i==tourmaxCourse){
              for (int z =0; z< classement.size();z++)
              {
+                 if (classement.indexOf(z) <1){
+                     course.setArgent(200);
+                 }
+                 else if(classement.indexOf(z)<3){
+                     course.setArgent(150);
+                 }else{
+                     course.setArgent(75);
+                 }
                  
              }
                      }   

@@ -69,7 +69,7 @@ public class Course {
         return this.argent;
     }
     public void setArgent (int tune){
-        this.argent=tune;
+        this.argent=argent +tune;
     }
     public int getTourActuel() {
         return tourActuel;

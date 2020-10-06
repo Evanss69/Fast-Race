@@ -218,19 +218,9 @@ public class mainFrame extends javax.swing.JFrame {
         
         int tourmax;
         
-        // voiture de test
-        
-                
-        Voiture jun= new Voiture("junon", VitesseMaxVoiture.BASIQUE,AccelerationVoiture.PUISSANTE,false); 
-        Voiture ter = new Voiture("Terror", VitesseMaxVoiture.PUISSANTE, AccelerationVoiture.BASIQUE, false);
-        
         
 
-        ArrayList<Voiture> listeVoiture = new ArrayList();
-        listeVoiture.add(jun);
-        listeVoiture.add(ter);
-        
-        //Création aléatoire d'une liste de voiture Evan
+        ArrayList<Voiture> listeVoiture = Voiture.genererVoitures(10);
        
         Course course = new Course(5, listeVoiture );
         

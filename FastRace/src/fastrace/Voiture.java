@@ -5,11 +5,9 @@
  */
 package fastrace;
 
+import java.util.ArrayList;
+import java.util.Random;
 
-/**
- *
- * @author p1925390
- */
 
 public class Voiture implements Comparable<Voiture> {
     String nomVoiture;
@@ -78,5 +76,57 @@ public class Voiture implements Comparable<Voiture> {
     public int compareTo(Voiture v) {
        return this.getVitesse() - v.getVitesse();
     }
+    
+    private static Voiture genererVoiture() {
+        Random random = new Random();   
+        
+        String nom = NameGenerator.generate();
+        AccelerationVoiture acc;
+        int acc_rd = random.nextInt(2);
+        switch(acc_rd) {
+            case 1:
+                acc = AccelerationVoiture.NORMAL;
+                break;
+            case 2:  
+                acc = AccelerationVoiture.PUISSANTE;
+                break;
+            default:
+                acc = AccelerationVoiture.BASIQUE;
+                break;
+        }
+        
+        VitesseMaxVoiture vmax;
+        int vmax_rd = random.nextInt(2);
+        switch(vmax_rd) {
+            case 1:
+                vmax = VitesseMaxVoiture.PUISSANTE;
+                break;
+            case 2:  
+                vmax = VitesseMaxVoiture.RAPIDE;
+                break;
+            default:
+                vmax = VitesseMaxVoiture.BASIQUE;
+                break;
+        }
+        
+        boolean pneuPluie = random.nextBoolean();
+        
+        Voiture v = new Voiture(nom,vmax,acc, pneuPluie);
+        return v;
+    }
+    
+    public static ArrayList<Voiture> genererVoitures(int nb) {
+        ArrayList<Voiture> voitures = new ArrayList<Voiture>();
+        for(int i=0;i<nb;i++) {
+            voitures.add(Voiture.genererVoiture());
+        }
+        return voitures;
+    }
+
+    @Override
+    public String toString() {
+        return "Voiture{" + "nomVoiture=" + nomVoiture + ", vitesseActuelle=" + vitesseActuelle + ", vitesseMax=" + vitesseMax + ", acceleration=" + acceleration + ", pneuPluie=" + pneuPluie + ", boosted=" + boosted + '}';
+    }
+    
     
 }

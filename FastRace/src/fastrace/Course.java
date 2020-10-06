@@ -69,8 +69,11 @@ public class Course {
     public int getArgent() {
         return this.argent;
     }
-    public void setArgent (int tune){
-        this.argent=tune;
+    public void addArgent (int argent){
+        this.argent+=argent;
+    }
+    public void debiterArgent (int argent){
+        this.argent-=argent;
     }
     public int getTourActuel() {
         return tourActuel;

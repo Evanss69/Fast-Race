@@ -399,12 +399,20 @@ public class mainFrame extends javax.swing.JFrame {
             
              //Update la barre de progres de la course
             progresCourse.setValue(100/tourmaxCourse*(i+1));
-         if ( i==tourmaxCourse){
-             for (int z =0; z< classement.size();z++)
-             {
-                 
-             }
-                     }   
+            if ( i==tourmaxCourse){
+                for (int z =0; z< classement.size();z++)
+                {
+                    if (classement.indexOf(z) <1){
+                        course.addArgent(200);
+                    }
+                    else if(classement.indexOf(z)<3){
+                        course.addArgent(150);
+                    }else{
+                        course.addArgent(75);
+                    }
+
+                }
+            }   
         }
         course = new Course(5, listeVoiture );
         listModel = new DefaultListModel();

@@ -38,6 +38,26 @@ public class Voiture implements Comparable<Voiture> {
         this.malus=false;
     }
 
+    public void setNomVoiture(String nomVoiture) {
+        this.nomVoiture = nomVoiture;
+    }
+
+    public void setVitesseActuelle(int vitesseActuelle) {
+        this.vitesseActuelle = vitesseActuelle;
+    }
+
+    public void setVitesseMax(int vitesseMax) {
+        this.vitesseMax = vitesseMax;
+    }
+
+    public void setAcceleration(int acceleration) {
+        this.acceleration = acceleration;
+    }
+
+    public void setPneuPluie(boolean pneuPluie) {
+        this.pneuPluie = pneuPluie;
+    }
+
     public String getNomVoiture() {
         return nomVoiture;
     }

@@ -12,6 +12,7 @@ public class Course {
     private ArrayList<Voiture> voitures;
     private int nbToursMax;
     private int tourActuel;
+    public static Voiture voitureJoueur = new Voiture("voitureJoueur");
     
     public Course(int nbTours, ArrayList<Voiture> voitures) {
         this.nbToursMax = nbTours;

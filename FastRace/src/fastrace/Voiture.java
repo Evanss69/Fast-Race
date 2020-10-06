@@ -19,8 +19,8 @@ public class Voiture implements Comparable<Voiture> {
 
     public Voiture(String nomVoiture){
         vitesseActuelle = 0;
-        vitesseMax = 0;
-        acceleration=0;
+        vitesseMax = 150;
+        acceleration=50;
         pneuPluie=false;
         boosted=false;
     }
@@ -72,7 +72,33 @@ public class Voiture implements Comparable<Voiture> {
        }
        return vitesseActuelle;
    }  
+
+    public void setNomVoiture(String nomVoiture) {
+        this.nomVoiture = nomVoiture;
+    }
+
+    public void setVitesseActuelle(int vitesseActuelle) {
+        this.vitesseActuelle = vitesseActuelle;
+    }
+
+    public void setVitesseMax(int vitesseMax) {
+        this.vitesseMax = vitesseMax;
+    }
+
+    public void setAcceleration(int acceleration) {
+        this.acceleration = acceleration;
+    }
+
+    public void setPneuPluie(boolean pneuPluie) {
+        this.pneuPluie = pneuPluie;
+    }
+
+    public void setBoosted(boolean boosted) {
+        this.boosted = boosted;
+    }
     
+   
+   
     public int compareTo(Voiture v) {
        return this.getVitesse() - v.getVitesse();
     }
@@ -127,6 +153,7 @@ public class Voiture implements Comparable<Voiture> {
     public String toString() {
         return "Voiture{" + "nomVoiture=" + nomVoiture + ", vitesseActuelle=" + vitesseActuelle + ", vitesseMax=" + vitesseMax + ", acceleration=" + acceleration + ", pneuPluie=" + pneuPluie + ", boosted=" + boosted + '}';
     }
+
     
     
 }

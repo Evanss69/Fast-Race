@@ -5,6 +5,7 @@
  */
 package fastrace;
 
+import static fastrace.Course.voitureJoueur;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -34,6 +35,9 @@ public class mainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroupVitesseMax = new javax.swing.ButtonGroup();
+        buttonGroupAcceleration = new javax.swing.ButtonGroup();
+        buttonGroupPneus = new javax.swing.ButtonGroup();
         labelFastRace = new javax.swing.JLabel();
         panelMenu = new javax.swing.JPanel();
         boutonLancer = new javax.swing.JButton();
@@ -48,6 +52,21 @@ public class mainFrame extends javax.swing.JFrame {
         butonRetour = new javax.swing.JButton();
         panelPerso = new javax.swing.JPanel();
         panelPerso.setVisible(false);
+        radioVitesseMax1 = new javax.swing.JRadioButton();
+        radioVitesseMax2 = new javax.swing.JRadioButton();
+        radioVitesseMax3 = new javax.swing.JRadioButton();
+        radioAcceleration1 = new javax.swing.JRadioButton();
+        radioAcceleration2 = new javax.swing.JRadioButton();
+        radioAcceleration3 = new javax.swing.JRadioButton();
+        radioPneu1 = new javax.swing.JRadioButton();
+        radioPneu2 = new javax.swing.JRadioButton();
+        boutonValiderPerso = new javax.swing.JButton();
+        boutonQuitterPerso = new javax.swing.JButton();
+        labelVitesseMax = new javax.swing.JLabel();
+        labelAcceleration = new javax.swing.JLabel();
+        labelPneus = new javax.swing.JLabel();
+        textfieldNom = new javax.swing.JTextField();
+        labelNomPilote = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,9 +149,8 @@ public class mainFrame extends javax.swing.JFrame {
                 .addContainerGap(144, Short.MAX_VALUE)
                 .addGroup(panelClassementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(progresCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelClassementLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(128, 128, 128))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(128, 128, 128))
             .addGroup(panelClassementLayout.createSequentialGroup()
                 .addGap(176, 176, 176)
                 .addComponent(butonRetour)
@@ -150,15 +168,136 @@ public class mainFrame extends javax.swing.JFrame {
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
+        buttonGroupVitesseMax.add(radioVitesseMax1);
+        radioVitesseMax1.setText("Basique");
+        radioVitesseMax1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioVitesseMax1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupVitesseMax.add(radioVitesseMax2);
+        radioVitesseMax2.setText("Rapide");
+
+        buttonGroupVitesseMax.add(radioVitesseMax3);
+        radioVitesseMax3.setText("Puissante");
+
+        buttonGroupAcceleration.add(radioAcceleration1);
+        radioAcceleration1.setText("Basique");
+
+        buttonGroupAcceleration.add(radioAcceleration2);
+        radioAcceleration2.setText("Normale");
+
+        buttonGroupAcceleration.add(radioAcceleration3);
+        radioAcceleration3.setText("Puissante");
+
+        buttonGroupPneus.add(radioPneu1);
+        radioPneu1.setText("Classiques");
+
+        buttonGroupPneus.add(radioPneu2);
+        radioPneu2.setText("Pluie");
+
+        boutonValiderPerso.setText("Valider");
+        boutonValiderPerso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonValiderPersoActionPerformed(evt);
+            }
+        });
+
+        boutonQuitterPerso.setText("Quitter");
+        boutonQuitterPerso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonQuitterPersoActionPerformed(evt);
+            }
+        });
+
+        labelVitesseMax.setText("Vitesse Max");
+
+        labelAcceleration.setText("Acceleration");
+
+        labelPneus.setText("Pneus");
+
+        labelNomPilote.setText("Nom du pilote");
+
         javax.swing.GroupLayout panelPersoLayout = new javax.swing.GroupLayout(panelPerso);
         panelPerso.setLayout(panelPersoLayout);
         panelPersoLayout.setHorizontalGroup(
             panelPersoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 371, Short.MAX_VALUE)
+            .addGroup(panelPersoLayout.createSequentialGroup()
+                .addGroup(panelPersoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelPersoLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(boutonQuitterPerso)
+                        .addGap(102, 102, 102)
+                        .addComponent(boutonValiderPerso))
+                    .addGroup(panelPersoLayout.createSequentialGroup()
+                        .addGap(141, 141, 141)
+                        .addGroup(panelPersoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelNomPilote)
+                            .addComponent(labelVitesseMax)))
+                    .addGroup(panelPersoLayout.createSequentialGroup()
+                        .addGap(154, 154, 154)
+                        .addComponent(labelPneus))
+                    .addGroup(panelPersoLayout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addComponent(textfieldNom, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelPersoLayout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addGroup(panelPersoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelPersoLayout.createSequentialGroup()
+                                .addComponent(radioPneu1)
+                                .addGap(70, 70, 70)
+                                .addComponent(radioPneu2))
+                            .addGroup(panelPersoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(panelPersoLayout.createSequentialGroup()
+                                    .addComponent(radioAcceleration1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(radioAcceleration2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(radioAcceleration3))
+                                .addGroup(panelPersoLayout.createSequentialGroup()
+                                    .addComponent(radioVitesseMax1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(panelPersoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(labelAcceleration)
+                                        .addGroup(panelPersoLayout.createSequentialGroup()
+                                            .addComponent(radioVitesseMax2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(radioVitesseMax3))))))))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         panelPersoLayout.setVerticalGroup(
             panelPersoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 344, Short.MAX_VALUE)
+            .addGroup(panelPersoLayout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addComponent(labelNomPilote)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(textfieldNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(labelVitesseMax)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelPersoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radioVitesseMax1)
+                    .addComponent(radioVitesseMax2)
+                    .addComponent(radioVitesseMax3))
+                .addGap(10, 10, 10)
+                .addComponent(labelAcceleration)
+                .addGap(10, 10, 10)
+                .addGroup(panelPersoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radioAcceleration1)
+                    .addComponent(radioAcceleration2)
+                    .addComponent(radioAcceleration3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelPneus)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelPersoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radioPneu1)
+                    .addComponent(radioPneu2))
+                .addGap(35, 35, 35)
+                .addGroup(panelPersoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(boutonValiderPerso)
+                    .addComponent(boutonQuitterPerso))
+                .addGap(34, 34, 34))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,29 +307,28 @@ public class mainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(203, 203, 203)
                 .addComponent(labelFastRace)
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelPerso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 21, Short.MAX_VALUE)
+                    .addGap(0, 95, Short.MAX_VALUE)
                     .addComponent(panelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 22, Short.MAX_VALUE)))
+                    .addGap(0, 95, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(panelClassement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelPerso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(labelFastRace)
-                .addContainerGap(350, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelPerso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelFastRace))
+                .addContainerGap(57, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -200,11 +338,6 @@ public class mainFrame extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(panelClassement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelPerso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -252,7 +385,39 @@ public class mainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_boutonLancerActionPerformed
 
     private void boutonPersoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonPersoActionPerformed
-        // TODO add your handling code here:
+                panelPerso.setVisible(true);
+        panelMenu.setVisible(false);
+        /*Mise à jour automatique de l'Interface de personnalisation en fonction des stats de la voiture de base*/
+       
+        textfieldNom.setText(voitureJoueur.getNomVoiture());
+        
+        /*Vitesse max*/
+        if (voitureJoueur.getVitesseMax()==150){
+            radioVitesseMax1.setSelected(true);
+        }
+        else if (voitureJoueur.getVitesseMax()==200){
+            radioVitesseMax2.setSelected(true);
+        }
+        else if (voitureJoueur.getVitesseMax()==250){
+            radioVitesseMax3.setSelected(true);
+        }
+        /*Acceleration*/
+        if (voitureJoueur.getAcceleration()==50){
+            radioAcceleration1.setSelected(true);
+        }
+        else if (voitureJoueur.getVitesseMax()==70){
+            radioAcceleration2.setSelected(true);
+        }
+        else if (voitureJoueur.getVitesseMax()==100){
+            radioAcceleration3.setSelected(true);
+        }
+        /*Pneus*/
+        if (voitureJoueur.isPneuPluie()==false){
+            radioPneu1.setSelected(true);
+        }
+        else {
+            radioPneu2.setSelected(true);
+        }
     }//GEN-LAST:event_boutonPersoActionPerformed
 
     private void butonRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butonRetourActionPerformed
@@ -260,6 +425,63 @@ public class mainFrame extends javax.swing.JFrame {
         panelMenu.setVisible(true);
         panelPerso.setVisible(false);
     }//GEN-LAST:event_butonRetourActionPerformed
+
+    private void radioVitesseMax1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioVitesseMax1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radioVitesseMax1ActionPerformed
+
+    private void boutonQuitterPersoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonQuitterPersoActionPerformed
+        panelMenu.setVisible(true);
+        panelPerso.setVisible(false);   
+    }//GEN-LAST:event_boutonQuitterPersoActionPerformed
+
+    private void boutonValiderPersoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonValiderPersoActionPerformed
+        //On applique les modifications a la voiture du joueur
+        
+        voitureJoueur.setNomVoiture(textfieldNom.getText().toString());
+        
+        //Vitesse Max :
+        VitesseMaxVoiture vMax; 
+        if (radioVitesseMax1.isSelected()){
+            vMax=VitesseMaxVoiture.BASIQUE;
+        }
+        else if(radioVitesseMax2.isSelected()){
+            vMax=VitesseMaxVoiture.RAPIDE;
+        }
+        else if (radioVitesseMax3.isSelected()){
+            vMax=VitesseMaxVoiture.PUISSANTE;
+        }
+        
+        else vMax=VitesseMaxVoiture.BASIQUE;
+        
+        //Acceleration :
+        AccelerationVoiture acc;
+        
+        if (radioAcceleration1.isSelected()){
+            acc=AccelerationVoiture.BASIQUE;
+        }
+        else if (radioAcceleration2.isSelected()){
+            acc=AccelerationVoiture.NORMAL;
+        }
+        else if (radioAcceleration2.isSelected()){
+            acc=AccelerationVoiture.PUISSANTE;
+        }
+        else acc=AccelerationVoiture.BASIQUE;
+        
+        //Pneus
+        boolean pneu;
+        if (radioPneu1.isSelected()){
+            pneu=false;
+        }
+        else if (radioPneu2.isSelected()){
+            pneu=true;
+        }
+        else pneu =false;
+        voitureJoueur.setVitesseMax(vMax.action());
+        voitureJoueur.setAcceleration(acc.action());
+        voitureJoueur.setPneuPluie(pneu);
+        
+    }//GEN-LAST:event_boutonValiderPersoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,15 +521,33 @@ public class mainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton boutonLancer;
     private javax.swing.JButton boutonPerso;
+    private javax.swing.JButton boutonQuitterPerso;
+    private javax.swing.JButton boutonValiderPerso;
     private javax.swing.JButton butonRetour;
+    private javax.swing.ButtonGroup buttonGroupAcceleration;
+    private javax.swing.ButtonGroup buttonGroupPneus;
+    private javax.swing.ButtonGroup buttonGroupVitesseMax;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSlider jSlider1;
+    private javax.swing.JLabel labelAcceleration;
     private javax.swing.JLabel labelConcurrent;
     private javax.swing.JLabel labelFastRace;
+    private javax.swing.JLabel labelNomPilote;
+    private javax.swing.JLabel labelPneus;
+    private javax.swing.JLabel labelVitesseMax;
     private javax.swing.JList<String> listeClassement;
     private javax.swing.JPanel panelClassement;
     private javax.swing.JPanel panelMenu;
     private javax.swing.JPanel panelPerso;
     private javax.swing.JProgressBar progresCourse;
+    private javax.swing.JRadioButton radioAcceleration1;
+    private javax.swing.JRadioButton radioAcceleration2;
+    private javax.swing.JRadioButton radioAcceleration3;
+    private javax.swing.JRadioButton radioPneu1;
+    private javax.swing.JRadioButton radioPneu2;
+    private javax.swing.JRadioButton radioVitesseMax1;
+    private javax.swing.JRadioButton radioVitesseMax2;
+    private javax.swing.JRadioButton radioVitesseMax3;
+    private javax.swing.JTextField textfieldNom;
     // End of variables declaration//GEN-END:variables
 }

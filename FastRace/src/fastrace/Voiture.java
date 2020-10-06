@@ -77,10 +77,22 @@ public class Voiture implements Comparable<Voiture> {
        return this.getVitesse() - v.getVitesse();
     }
     
-    private static Voiture genererVoiture() {
+    private static Voiture genererVoiture(ArrayList<Voiture> autresVoitures) {
         Random random = new Random();   
         
-        String nom = NameGenerator.generate();
+        String nom;
+        boolean nameExist;
+        do{
+            nameExist = false;
+            nom = NameGenerator.generate();
+            // Vérifier que le nom n'existe pas déjà
+            for(Voiture v: autresVoitures) {
+                if (v.getNomVoiture().equals(nom)) {
+                    nameExist = true;
+                }
+            }
+        } while (nameExist);
+        
         AccelerationVoiture acc;
         int acc_rd = random.nextInt(2);
         switch(acc_rd) {
@@ -118,7 +130,7 @@ public class Voiture implements Comparable<Voiture> {
     public static ArrayList<Voiture> genererVoitures(int nb) {
         ArrayList<Voiture> voitures = new ArrayList<Voiture>();
         for(int i=0;i<nb;i++) {
-            voitures.add(Voiture.genererVoiture());
+            voitures.add(Voiture.genererVoiture(voitures));
         }
         return voitures;
     }

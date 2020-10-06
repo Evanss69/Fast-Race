@@ -230,6 +230,7 @@ public class mainFrame extends javax.swing.JFrame {
        
         course = new Course(5, listeVoiture );
         listModel = new DefaultListModel();
+         btAjoutTour.setVisible(true);
         
         ArrayList<Voiture> classement = course.getClassement();
         listModel.clear();

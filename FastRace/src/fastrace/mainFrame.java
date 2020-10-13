@@ -25,8 +25,8 @@ public class mainFrame extends javax.swing.JFrame {
         initComponents();
     }
     
-    static Course course;
-    static DefaultListModel listModel;
+    Course course;
+    DefaultListModel listModel;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -376,11 +376,11 @@ public class mainFrame extends javax.swing.JFrame {
         //on récupére la liste des voitures aléatoires
         ArrayList<Voiture> listeVoiture = Voiture.genererVoitures(sliderNombreVoiture.getValue());
        
-        Course course = new Course(5, listeVoiture );
+        course = new Course(5, listeVoiture );
         
         
         
-        DefaultListModel listModel = new DefaultListModel();
+        listModel = new DefaultListModel();
         
 
         int tourmaxCourse = course.getNbTourMax();
